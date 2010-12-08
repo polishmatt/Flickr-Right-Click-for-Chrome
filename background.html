@@ -1,0 +1,48 @@
+<html>
+<head>
+<script>
+
+function clone(obj){
+  var newObj = (obj instanceof Array) ? [] : {};
+  for (var i in obj) {
+    if (obj[i] && typeof obj[i] == "object") 
+      newObj[i] = clone(obj[i]);
+    else
+      newObj[i] = obj[i];
+  }
+  return newObj;
+}
+
+  var properties = {
+	"title": "View All Sizes",
+	"contexts": ['image'],
+	"documentUrlPatterns": ['*://www.flickr.com/photos/*/*'],
+	"targetUrlPatterns": ['*://*.static.flickr.com/*/*'],
+	"onclick": function(info, tab) {
+		matches = tab.url.match(/http:\/\/www\.flickr\.com\/photos\/(.*?)\/([0-9]+)\/.*?/);
+		if(matches[1] && matches[2]) {
+			chrome.tabs.create({"url":"http://www.flickr.com/photos/"+matches[1]+"/"+matches[2]+"/sizes"});
+		}
+	}
+  };
+  var show = true;
+  var context = chrome.contextMenus.create(clone(properties));
+  
+  chrome.tabs.onSelectionChanged.addListener(
+	function(tabId, selectInfo) {
+		chrome.tabs.get(tabId, function(tab) {
+			if(tab.url.indexOf("sizes") != -1) {
+				if(show) {
+					show = false;
+					chrome.contextMenus.remove(context);
+					context = null;
+				}
+			} else if(!show) {
+				show = true;
+				context = chrome.contextMenus.create(clone(properties));
+			}
+		});
+  });
+</script>
+</head>
+</html>
