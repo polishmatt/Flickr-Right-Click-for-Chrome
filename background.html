@@ -17,7 +17,7 @@ function clone(obj){
 	"title": "View All Sizes",
 	"contexts": ['image'],
 	"documentUrlPatterns": ['*://www.flickr.com/photos/*/*'],
-	"targetUrlPatterns": ['*://*.static.flickr.com/*/*'],
+	"targetUrlPatterns": ['*://*.staticflickr.com/*/*'],
 	"onclick": function(info, tab) {
 		matches = tab.url.match(/http:\/\/www\.flickr\.com\/photos\/(.*?)\/([0-9]+)\/.*?/);
 		if(matches[1] && matches[2]) {
