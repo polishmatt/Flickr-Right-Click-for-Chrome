@@ -1,6 +1,6 @@
 {
   "name": "Flickr Right Click",
-  "version": "2.0",
+  "version": "2.0.1",
   "description": "Lets you right click images on Flickr.",
   "icons": { 
     "16": "icon16.png",
@@ -11,8 +11,7 @@
   "content_scripts": [
     {
       "matches": ["*://www.flickr.com/photos/*/*"],
-      "js": ["onload.js"],
-      "run_at": "document_end"
+      "css": ["base.css"]
     }
   ],
 
