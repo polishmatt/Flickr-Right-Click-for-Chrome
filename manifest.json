@@ -1,6 +1,6 @@
 {
   "name": "Flickr Right Click",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Lets you right click images on Flickr.",
   "icons": { 
     "16": "icon16.png",
